@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h3 class="modal-title">Help</h3>
+</div>
+<div class="modal-body">
+    <h4>Can I use regular expressions in the url?</h4>
+    <p>Yes you can. The character / is the only one automatically escaped for you by adding a \ before it.
+        This can be usefull: <a target="_blank" href="http://www.regexper.com/">http://www.regexper.com/</a></p>
+
+    <h4>How can I add a big script or a linked script, like jQuery?</h4>
+    <p>
+        <a target="_blank"
+           href="https://stackoverflow.com/questions/950087/how-to-include-a-javascript-file-in-another-javascript-file">
+            You can always use javascript to load an external Javascript URL into your page.
+        </a>
+        <br>
+        You can copy paste the following code for a try:
+        <pre>
+function loadScript(url, callback)
+{
+// Adding the script tag to the head as suggested before
+var head = document.getElementsByTagName('head')[0];
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = url;
+
+// Then bind the event to the callback function.
+// There are several events for cross browser compatibility.
+script.onreadystatechange = callback;
+script.onload = callback;
+
+// Fire the loading
+head.appendChild(script);
+}
+
+loadScript('https://code.jquery.com/jquery-1.11.1.min.js', function() {});
+        </pre>
+    </p>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+</div>

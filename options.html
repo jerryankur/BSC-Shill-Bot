@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html ng-app="options">
+<head>
+    <title>BSC Shill Bot</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/options.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="main-container" ng-controller="optionsController">
+
+        <h4 class="neon"> BSC Shill Bot</h4>
+		
+		<div class="row search-items">
+            <div class="col-sm-2">
+                <button ng-click="showForm = true" type="button" class="btn btn-primary btn-block" id="add">Create New Message</button>
+            </div>
+        </div>
+
+        <div ng-class="{show: savedSuccessfully}" class="succcess-message invisible">
+            <div class="alert alert-success" role="alert">Saved successfully</div>
+        </div>
+        <div ng-show="items.length <= 0 && showForm == false">
+            <h4>No messages yet! Try it out and add your first message to shill.</h4>
+        </div>
+
+        <table ng-show="items.length > 0 || showForm" ng-cloak class="regex-list table table-hover">
+            <tr class="info">
+                <th>url to inject</th>
+                <th>actions</th>
+                <th>status</th>
+            </tr>
+            <!-- add item form-->
+            <tr ng-show="showForm">
+                <td>
+                    <input class="input-sm form-control" ng-model="inject.url"
+                           placeholder="https://disqus.com/embed/comments" value="https://disqus.com/embed/comments" readonly>
+                </td>
+                <td class="col-sm-2 actions">ready</td>
+                <td>
+                    <button class="btn btn-sm btn-block btn-success disabled">On by default</button>
+                </td>
+
+            </tr>
+            <tr ng-show="showForm">
+                <td class="jscode" colspan="3">
+                    <a target="_blank"
+                       href="https://developer.chrome.com/extensions/storage#property-sync-QUOTA_BYTES_PER_ITEM">
+                        message (max 4,096 bytes)
+                    </a>
+                    <textarea ng-model="inject.code" id="msg" placeholder="Write your message..."
+                              class="form-control" rows="8"></textarea>
+							  
+                    <button ng-click="save(inject)" class="btn btn-info btn-xs" id="codes">Save</button>
+                    <button ng-click="showForm = false" class="btn btn-default btn-xs">Cancel</button>
+                </td>
+            </tr>
+            <!--/add item form-->
+            <tr ng-repeat-start="item in items | filter: {url: search}">
+                <td class="col-sm-8">
+                    <span ng-show="!edit[item.guid]">{{ item.url }}</span>
+                    <span ng-show="edit[item.guid]">
+                        <input class="form-control" placeholder="https://disqus.com/embed/comments" ng-model="item.url" value="https://disqus.com/embed/comments" readonly>
+                    </span>
+                </td>
+                <td class="col-sm-2 actions">
+     				<span ng-click="edit[item.guid] = !edit[item.guid] " class="glyphicon glyphicon-pencil"></span>
+                    <span ng-click="remove(item)" id="reload" class="glyphicon glyphicon-trash"></span>
+                </td>
+                <td>
+				<button type="button" class="btn-success btn" name="fstart" access="false" style="success" id="fstart">Start Shill</button>
+				</td>
+				<td>
+				<button type="button" class="btn-danger btn" name="fstop" access="false" style="danger" id="fstop">Stop</button>
+				</td>
+            </tr>
+            <tr ng-show="edit[item.guid]" ng-repeat-end>
+                <td class="jscode" colspan="3">
+                    <textarea ng-model="item.code" id="sLatitude" class="form-control" rows="8">{{ item.code }}</textarea>
+                    <button ng-click=" save(item); edit[item.guid] = false" class="btn btn-info btn-xs">Save</button>
+                    <button ng-click="edit[item.guid] = false" class="btn btn-default btn-xs">Cancel</button>
+                </td>
+            </tr>
+        </table>
+        <table class="regex-list table table-hover">
+            <tr class="info">
+                <th>Total Bots</th>
+                <th>This bot number</th>
+            </tr>
+            <tr>
+                <td><input  id="nbots" class="form-control"></input></td>
+                <td><input  id="nbot" class="form-control"></input></td>
+            </tr>
+        </table>
+		Token List (Leave it Blank to Auto-Scan)
+		<textarea id="urls" placeholder="BSC Address List (One per line)"
+                              class="form-control" rows="5"></textarea>
+    </div>
+<div id="resx0">Actually:</div>
+<div id="resx1"></div>
+<div id="resx2">Action Log</div>
+<div id="resx3"></div>
+<div style="display:none">
+{{inject.url="https://disqus.com/embed/comments"}}
+<input id="msg"/>
+</div>
+<style>
+.neon {
+    animation: neonAnim 2s alternate-reverse infinite;
+    color: #007BFF;
+    font-family: Cursive;
+    font-size: 72px;
+}
+@keyframes neonAnim {
+    from {
+        text-shadow:
+          0 0 10px rgba(0, 123, 255, .7),
+          0 0 40px rgba(0, 123, 255, .7),
+          0 0 100px rgba(0, 123, 255, .7);
+      }
+      to {
+        text-shadow:
+          0 0 5px rgba(0, 123, 255, .7),
+          0 0 20px rgba(0, 123, 255, .7),
+          0 0 60px rgba(0, 123, 255, .7);
+      }
+}
+</style>
+    <footer>
+        This is a private tool by <a target="_blank" href="https://cointutu.com">https://cointutu.com</a>
+    </footer>
+</div>
+
+<script src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.angular.js"></script>
+<script src="js/options.controller.js"></script>
+<script src="js/help.controller.js"></script>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/web3.min.js"></script>
+<script src="js/dir.js"></script>
+</body>
+</html>

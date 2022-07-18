@@ -1,0 +1,102 @@
+
+body {
+    padding-top: 30px;
+    background-color: #fbfbfb;
+}
+
+table.regex-list {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    background-color: white;
+    -webkit-box-shadow: 0 1px 3px rgba(142, 142, 142, 0.3);
+    box-shadow: 0 1px 3px rgba(142, 142, 142, 0.3);
+    border: 1px solid #ccc;
+}
+
+.add-wrapper {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    background-color: white;
+    -webkit-box-shadow: 0 1px 3px rgba(142, 142, 142, 0.3);
+    box-shadow: 0 1px 3px rgba(142, 142, 142, 0.3);
+    border: 1px solid #ccc;
+
+    margin-bottom: 30px;
+    padding-top: 20px;
+}
+
+.succcess-message {
+    margin-bottom: 0px;
+    text-align: center;
+}
+.succcess-message .alert {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.show {
+    visibility: visible;
+}
+.regex-list th {
+    text-align: center;
+}
+
+.main-container h4 {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+form.search {
+    margin-left: 40px;
+}
+
+.actions .glyphicon-trash {
+    margin-left: 10px;
+}
+
+.actions {
+    text-align: center;
+}
+
+.actions .glyphicon {
+    cursor: pointer;
+}
+
+.jscode textarea {
+    resize: vertical;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.jscode button {
+    float: right;
+    margin-left: 10px;
+}
+
+.add-wrapper{
+    display:none;
+}
+
+.search-items {
+    margin-bottom: 10px;
+}
+
+.glyphicon-trash:hover {
+    color: red;
+}
+
+.glyphicon-pencil:hover {
+    color: green;
+}
+
+footer {
+    text-align: right;
+    margin-right: 20px;
+    font-size: 10px;
+}
